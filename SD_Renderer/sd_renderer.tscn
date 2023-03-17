@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://divf8341be0fa"]
+
+[ext_resource type="Script" path="res://SD_Renderer/sd_renderer.gd" id="1_r7f50"]
+[ext_resource type="Texture2D" uid="uid://bmtj3xxhiea4l" path="res://SD_Renderer/godot.jpeg" id="2_c8gm7"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_r7f50")
+
+[node name="HTTPRequestImage" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequestModels" type="HTTPRequest" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 2
+offset_right = 2060.0
+offset_bottom = 512.0
+
+[node name="ResultDisplay" type="TextureRect" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+texture = ExtResource("2_c8gm7")
+
+[node name="MainViewportConainer" type="SubViewportContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+stretch = true
+
+[node name="ViewportMain" type="SubViewport" parent="Control/HBoxContainer/MainViewportConainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="DepthViewportContainer" type="SubViewportContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+stretch = true
+
+[node name="ViewportDepth" type="SubViewport" parent="Control/HBoxContainer/DepthViewportContainer"]
+handle_input_locally = false
+positional_shadow_atlas_size = 0
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Control/HBoxContainer/DepthViewportContainer/ViewportDepth"]
+
+[node name="NormalViewportContainer" type="SubViewportContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+stretch = true
+
+[node name="ViewportNormal" type="SubViewport" parent="Control/HBoxContainer/NormalViewportContainer"]
+handle_input_locally = false
+positional_shadow_atlas_size = 0
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Control/HBoxContainer/NormalViewportContainer/ViewportNormal"]
